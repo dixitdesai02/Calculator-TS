@@ -12,6 +12,8 @@ const second = body.querySelector("#second");
 const operators = ["+", "×", "÷", "-", "*", "/"];
 const keywords = ["(", ")", "!", "."];
 const isNumber = (num) => {
+    if (num.length > 1)
+        return false;
     return (num >= '0' && num <= '9') || num === "π" || num === "e";
 };
 const isOperator = (op) => {
@@ -210,6 +212,7 @@ const handleClick = (key) => {
             case "2nd":
             case "1st":
                 changeButtons();
+                break;
             default:
                 break;
         }
@@ -239,7 +242,6 @@ const validSymbol = (value) => {
 const evaluate = (expression) => {
     try {
         expression = formatExpression(expression);
-        console.log(expression);
         const res = Math.round(eval(expression) * 100000) / 100000;
         return res.toString();
     }

@@ -15,6 +15,8 @@ const keywords = ["(" , ")", "!", "."];
 
 
 const isNumber = (num: string): boolean => {
+    if (num.length > 1) 
+        return false;
     return (num >= '0' && num <= '9') || num === "π" || num === "e";
 }
 
@@ -89,6 +91,7 @@ backspace.addEventListener("click", (e) => {
 
 // Handling Operations
 const handleClick = (key: string) => {
+
     if (isNumber(key) || isOperator(key) || isKeyword(key)) {
         input.value += validSymbol(key);
     }
@@ -272,6 +275,7 @@ const handleClick = (key: string) => {
             case "2nd":
             case "1st":
                 changeButtons();
+                break;
 
             default:
                 break;
@@ -310,7 +314,7 @@ const validSymbol = (value: string): string => {
 const evaluate = (expression: string): string => {
     try {
         expression = formatExpression(expression);
-        console.log(expression);
+
         const res = Math.round(eval(expression)*100000)/100000;
         return res.toString();
 
